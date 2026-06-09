@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Waxdle - Guess The Album!</title>
+  <meta name="description" content="Guess the legendary album cover from progressively zoomed-out crops.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <button id="help-btn" class="icon-btn" aria-label="Help" title="How to Play">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </button>
+      <button id="about-btn" class="icon-btn" aria-label="About" title="About">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="header-center">
+      <h1 class="logo" style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+        <span>Waxdle</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"
+          style="color: var(--text-primary);">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M6 12c0-1.7.7-3.2 1.8-4.2" />
+          <circle cx="12" cy="12" r="2" />
+          <path d="M18 12c0 1.7-.7 3.2-1.8 4.2" />
+        </svg>
+        <span id="mode-text">Daily</span>
+      </h1>
+    </div>
+    <div class="header-right">
+      <button id="mode-switch-btn" class="icon-btn" aria-label="Switch Mode" title="Switch Mode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 14h10M4 14l4-4M4 14l4 4M20 10H10M20 10l-4-4M20 10l-4 4" />
+        </svg>
+      </button>
+      <button id="stats-btn" class="icon-btn" aria-label="Statistics" title="Statistics">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20v-6M6 20V10M18 20V4"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="game-container">
+      <div class="art-frame-wrapper">
+        <div class="art-frame-container">
+          <div id="art-frame" class="art-frame"></div>
+        </div>
+      </div>
+
+      <div class="progress-track" id="progress-track">
+
+      </div>
+
+      <div class="search-container">
+        <div id="game-status-message" class="hidden"></div>
+        <div id="search-wrapper">
+          <input type="text" id="guess-input" placeholder="Guess the album or artist..." autocomplete="off">
+          <ul id="autocomplete-list" class="autocomplete-list hidden"></ul>
+        </div>
+      </div>
+
+      <div id="post-game-actions" class="post-game-actions hidden">
+
+      </div>
+    </div>
+  </main>
+
+
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>How to Play</h2>
+      <p>Guess the <strong>album cover</strong> in 6 tries.</p>
+      <ul>
+        <li>Each guess must be a valid album from the search dropdown.</li>
+        <li>After each guess, the image zooms out revealing more of the cover art.</li>
+        <li>Play the Daily mode to test your skills, or Endless mode to practice.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="about-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content" style="text-align: center;">
+      <button class="close-btn">&times;</button>
+      <h2>Thanks for playing!</h2>
+      <p>Made with ♡ by <strong>Jacekarino</strong></p>
+      <p>This is an open-source prototype / proof of concept. The game is functional, but may have issues. Done in a day
+        for fun and as a learning experience and a portfolio piece. The code is public on GitHub if you're curious about
+        the inner workings. You can definitely cheat by looking up the albums database by the way.</p>
+      <a href="https://github.com/Jacekarino" target="_blank" class="btn btn-primary"
+        style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          style="vertical-align: middle; margin-right: 8px;">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+          </path>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <div id="stats-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>Daily Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="stat-played">0</div>
+          <div class="stat-label">Played</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-win">0</div>
+          <div class="stat-label">Win %</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-streak">0</div>
+          <div class="stat-label">Current Streak</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="stat-max-streak">0</div>
+          <div class="stat-label">Max Streak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="albums-db.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
