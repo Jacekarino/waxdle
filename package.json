@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf node_modules"
+    "build": "mkdir -p dist && cp index.html styles.css app.js albums-db.js vinyl.svg favicon.png dist/ || true"
   },
   "keywords": [],
   "author": "",
