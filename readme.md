@@ -7,7 +7,7 @@ A visual puzzle daily game where music fans must guess a legendary album cover. 
 
 # Running the project:
 
-[cloudflare pages link here]
+https://waxdle.pages.dev/
 
 Alternatively: Open index.html in your browser of choice.
 
