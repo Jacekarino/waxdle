@@ -374,6 +374,11 @@ function loadStats() {
   const saved = localStorage.getItem('waxdle_stats');
   if (saved) {
     dailyStats = JSON.parse(saved);
+  } else {
+    // Show help modal for first-time visitors
+    setTimeout(() => {
+      helpModal.classList.remove('hidden');
+    }, 100);
   }
 }
 
@@ -409,7 +414,7 @@ function shareDaily() {
     }
   }
 
-  const shareText = `💿 Waxdle ${displayDate}\n🔍 ${grid.trim()}\n🔊 Guessed in ${guessCount}/6`;
+  const shareText = `💿 Waxdle ${displayDate}\n🔍 ${grid.trim()}\n🔊 Guessed in ${guessCount}/6 \n🌐 Play at: waxdle.pages.dev`;
 
   navigator.clipboard.writeText(shareText).then(() => {
     const btn = postGameActions.querySelector('button');
