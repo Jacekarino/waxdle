@@ -540,7 +540,7 @@ artFrame.addEventListener('click', () => {
 async function playSnippet() {
   const audioToggle = document.getElementById('audio-toggle');
   if (!audioToggle || !audioToggle.checked) return;
-  if (!targetAlbum || !targetAlbum.topTrack) return;
+  if (!targetAlbum || !targetAlbum.topTrack || targetAlbum.topTrack === 'Unknown') return;
 
   stopSnippet();
 
