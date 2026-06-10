@@ -85,7 +85,7 @@ function hashCode(str) {
 
 function selectTargetAlbum() {
   if (currentMode === 'daily') {
-    const seed = hashCode(getTodayString() + "version1");
+    const seed = hashCode(getTodayString() + "v4");
     return albumsDB[seed % albumsDB.length];
   } else {
     const randomIndex = Math.floor(Math.random() * albumsDB.length);
@@ -133,10 +133,12 @@ function processGuess(guessAlbum) {
   if (isGameOver) return;
 
   const isCorrect = guessAlbum.album === targetAlbum.album && guessAlbum.artist === targetAlbum.artist;
+  const isArtistCorrect = guessAlbum.artist === targetAlbum.artist;
 
   attempts.push({
     guess: `${guessAlbum.artist} - ${guessAlbum.album}`,
-    correct: isCorrect
+    correct: isCorrect,
+    artistCorrect: isArtistCorrect
   });
 
   if (currentMode === 'daily') {
@@ -202,6 +204,8 @@ function renderUI() {
     if (i < attempts.length) {
       if (attempts[i].correct) {
         dot.classList.add('correct');
+      } else if (attempts[i].artistCorrect) {
+        dot.classList.add('partial');
       } else {
         dot.classList.add('wrong');
       }
@@ -393,7 +397,13 @@ function shareDaily() {
   let grid = '';
   for (let i = 0; i < MAX_ATTEMPTS; i++) {
     if (i < attempts.length) {
-      grid += attempts[i].correct ? '🟩 ' : '🟥 ';
+      if (attempts[i].correct) {
+        grid += '🟩 ';
+      } else if (attempts[i].artistCorrect) {
+        grid += '🟨 ';
+      } else {
+        grid += '🟥 ';
+      }
     } else {
       grid += '⬛ ';
     }

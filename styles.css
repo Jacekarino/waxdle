@@ -167,6 +167,12 @@ main {
   box-shadow: 0 0 10px var(--accent-color);
 }
 
+.dot.partial {
+  background-color: #e3b341;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px #e3b341;
+}
+
 
 .search-container {
   width: 100%;
