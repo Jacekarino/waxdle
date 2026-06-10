@@ -85,7 +85,7 @@ function hashCode(str) {
 
 function selectTargetAlbum() {
   if (currentMode === 'daily') {
-    const seed = hashCode(getTodayString() + "version3");
+    const seed = hashCode(getTodayString() + "version1");
     return albumsDB[seed % albumsDB.length];
   } else {
     const randomIndex = Math.floor(Math.random() * albumsDB.length);
