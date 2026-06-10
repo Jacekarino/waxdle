@@ -17,6 +17,14 @@
 <body>
   <header>
     <div class="header-left">
+      <button id="about-btn" class="icon-btn" aria-label="About" title="About">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+          </path>
+        </svg>
+      </button>
       <button id="help-btn" class="icon-btn" aria-label="Help" title="How to Play">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -25,11 +33,13 @@
           <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
       </button>
-      <button id="about-btn" class="icon-btn" aria-label="About" title="About">
+      <button id="hints-btn" class="icon-btn" aria-label="Hints" title="Hints">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="9" y1="18" x2="15" y2="18"></line>
+          <line x1="10" y1="22" x2="14" y2="22"></line>
           <path
-            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14">
           </path>
         </svg>
       </button>
@@ -59,6 +69,15 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 20v-6M6 20V10M18 20V4"></path>
+        </svg>
+      </button>
+      <button id="settings-btn" class="icon-btn" aria-label="Settings" title="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
         </svg>
       </button>
     </div>
@@ -96,7 +115,7 @@
     <div class="modal-content help-content">
       <button class="close-btn">&times;</button>
       <h2>How to Play</h2>
-      <p class="help-subtitle">Guess the <strong>album cover</strong> in 6 tries.</p>
+      <p class="help-subtitle">Guess the album cover in 6 tries.</p>
 
       <div class="help-examples">
         <div class="help-example">
@@ -164,21 +183,85 @@
     </div>
   </div>
 
+  <div id="mode-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content help-content">
+      <button class="close-btn">&times;</button>
+      <h2>Select Game Mode</h2>
+      <p class="help-subtitle">Choose how you want to play Waxdle.</p>
+
+      <div class="help-examples" style="gap: 1rem; padding: 1.2rem;">
+        <div class="help-example mode-option" id="select-daily"
+          style="cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.2s;">
+          <div class="example-box correct-box" style="width: 42px; height: 42px; border-radius: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div>
+            <div class="example-text" style="font-size: 1.1rem;">Daily</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">One puzzle a day for
+              everyone.</div>
+          </div>
+        </div>
+
+        <div class="help-example mode-option" id="select-endless"
+          style="cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.2s;">
+          <div class="example-box partial-box" style="width: 42px; height: 42px; border-radius: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 9l-6 6 6 6"></path>
+              <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="example-text" style="font-size: 1.1rem;">Endless</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Play as many times as you
+              want.</div>
+          </div>
+        </div>
+
+        <div class="help-example" style="padding: 0.5rem; opacity: 0.6; cursor: not-allowed;">
+          <div class="example-box"
+            style="width: 42px; height: 42px; border-radius: 8px; background: var(--track-empty); border: 1px dashed var(--text-secondary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="example-text" style="font-size: 1.1rem; color: var(--text-secondary);">More Coming Soon</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">New game modes are in the
+              works.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="about-modal" class="modal hidden">
     <div class="modal-backdrop"></div>
-    <div class="modal-content" style="text-align: center;">
+    <div class="modal-content help-content">
       <button class="close-btn">&times;</button>
-      <h2>Thanks for playing!</h2>
-      <p>Made with ♡ by <strong>Jacekarino</strong></p>
-      <p>This is an open-source prototype / proof of concept. The game is functional, but may have issues. Done in a day
+      <h2>About Waxdle</h2>
+      <p class="help-subtitle">Made with ♡ by Jacekarino</p>
+
+      <div class="help-examples"
+        style="text-align: left; font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary);">
+        This is an open-source prototype / proof of concept. The game is functional, but may have issues. Done in a day
         for fun and as a learning experience and a portfolio piece. Waxdle uses LastFM API for fetching the cover arts.
-        The code is public on GitHub if you're curious about the inner workings. You can definitely cheat by looking up
-        the albums database by the way.</p>
-      <a href="https://github.com/Jacekarino" target="_blank" class="btn btn-primary"
-        style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+        You can definitely cheat by looking up the albums database by the way.
+      </div>
+
+      <a href="https://github.com/Jacekarino" target="_blank" class="btn btn-primary help-start-btn"
+        style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          style="vertical-align: middle; margin-right: 8px;">
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path
             d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
           </path>
@@ -190,9 +273,11 @@
 
   <div id="stats-modal" class="modal hidden">
     <div class="modal-backdrop"></div>
-    <div class="modal-content">
+    <div class="modal-content help-content">
       <button class="close-btn">&times;</button>
       <h2>Daily Statistics</h2>
+      <p class="help-subtitle">Your Waxdle performance.</p>
+
       <div class="stats-grid">
         <div class="stat-box">
           <div class="stat-value" id="stat-played">0</div>
@@ -210,6 +295,87 @@
           <div class="stat-value" id="stat-max-streak">0</div>
           <div class="stat-label">Max Streak</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content help-content">
+      <button class="close-btn">&times;</button>
+      <h2>Settings</h2>
+      <p class="help-subtitle">Customize your Waxdle experience.</p>
+
+      <div class="help-examples" style="text-align: left; margin-bottom: 0;">
+        <div class="help-example" style="padding: 0.5rem; justify-content: space-between; border-bottom: 1px solid var(--border-color);">
+          <div>
+            <div class="example-text" style="font-size: 1.1rem;">Light Mode</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Toggle light/dark theme</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="help-example" style="padding: 0.5rem; justify-content: space-between;">
+          <div>
+            <div class="example-text" style="font-size: 1.1rem;">Song Snippet</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Play a 15s snippet on reveal</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="audio-toggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hints-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content help-content">
+      <button class="close-btn">&times;</button>
+      <h2>Hints</h2>
+      <p class="help-subtitle">Unlock hints by making guesses.</p>
+
+      <div class="stats-grid" id="hints-list">
+
+        <div class="stat-box hint-item" id="hint-1"
+          style="transition: opacity 0.3s; padding: 1rem; display: flex; flex-direction: column; justify-content: center;">
+          <div class="stat-value hint-value"
+            style="transition: color 0.3s; font-size: 1.5rem; word-break: break-word; line-height: 1.2;">???</div>
+          <div class="stat-label hint-label" style="transition: color 0.3s;">Primary Genre</div>
+        </div>
+
+        <div class="stat-box hint-item" id="hint-2"
+          style="transition: opacity 0.3s; padding: 1rem; display: flex; flex-direction: column; justify-content: center;">
+          <div class="stat-value hint-value"
+            style="transition: color 0.3s; font-size: 1.5rem; word-break: break-word; line-height: 1.2;">???</div>
+          <div class="stat-label hint-label" style="transition: color 0.3s;">Release Year</div>
+        </div>
+
+        <div class="stat-box hint-item" id="hint-3"
+          style="transition: opacity 0.3s; padding: 1rem; display: flex; flex-direction: column; justify-content: center;">
+          <div class="stat-value hint-value"
+            style="transition: color 0.3s; font-size: 1.5rem; word-break: break-word; line-height: 1.2;">???</div>
+          <div class="stat-label hint-label" style="transition: color 0.3s;">Total Runtime</div>
+        </div>
+
+        <div class="stat-box hint-item" id="hint-4"
+          style="transition: opacity 0.3s; padding: 1rem; display: flex; flex-direction: column; justify-content: center;">
+          <div class="stat-value hint-value"
+            style="transition: color 0.3s; font-size: 1.5rem; word-break: break-word; line-height: 1.2;">???</div>
+          <div class="stat-label hint-label" style="transition: color 0.3s;">Last.fm Scrobbles</div>
+        </div>
+
+        <div class="stat-box hint-item" id="hint-5"
+          style="grid-column: 1 / -1; transition: opacity 0.3s; padding: 1rem; display: flex; flex-direction: column; justify-content: center;">
+          <div class="stat-value hint-value"
+            style="transition: color 0.3s; font-size: 1.5rem; word-break: break-word; line-height: 1.2;">???</div>
+          <div class="stat-label hint-label" style="transition: color 0.3s;">Most Popular Track</div>
+        </div>
+
       </div>
     </div>
   </div>

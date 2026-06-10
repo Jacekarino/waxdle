@@ -12,6 +12,12 @@ const statsBtn = document.getElementById('stats-btn');
 const helpModal = document.getElementById('help-modal');
 const aboutModal = document.getElementById('about-modal');
 const statsModal = document.getElementById('stats-modal');
+const modeModal = document.getElementById('mode-modal');
+const settingsBtn = document.getElementById('settings-btn');
+const settingsModal = document.getElementById('settings-modal');
+const hintsBtn = document.getElementById('hints-btn');
+const hintsModal = document.getElementById('hints-modal');
+const themeToggle = document.getElementById('theme-toggle');
 
 const MAX_ATTEMPTS = 6;
 
@@ -24,6 +30,10 @@ let zoomOrigin = { x: 50, y: 50 };
 let isGameOver = false;
 let timeOffset = 0;
 let countdownInterval = null;
+
+let currentAudio = null;
+let audioFadeInterval = null;
+let audioTimeout = null;
 
 let dailyStats = {
   played: 0,
@@ -39,6 +49,7 @@ let dailyStats = {
 async function init() {
   await syncTime();
   loadStats();
+  loadTheme();
   setupEventListeners();
   startNewGame();
 }
@@ -93,7 +104,43 @@ function selectTargetAlbum() {
   }
 }
 
+function updateHintsUI() {
+  const hintsConfig = [
+    { id: 'hint-1', value: targetAlbum.genre || 'Unknown', unlocksAt: 1 },
+    { id: 'hint-2', value: targetAlbum.releaseYear || 'Unknown', unlocksAt: 2 },
+    { id: 'hint-3', value: targetAlbum.runtime || 'Unknown', unlocksAt: 3 },
+    { id: 'hint-4', value: targetAlbum.streams || 'Unknown', unlocksAt: 4 },
+    { id: 'hint-5', value: targetAlbum.topTrack || 'Unknown', unlocksAt: 5 }
+  ];
+
+  hintsConfig.forEach(hint => {
+    const el = document.getElementById(hint.id);
+    const valEl = el.querySelector('.hint-value');
+    const labelEl = el.querySelector('.hint-label');
+    const descEl = el.querySelector('.hint-desc');
+
+    if (attempts.length >= hint.unlocksAt || isGameOver) {
+      el.style.opacity = '1';
+      if (valEl) {
+        valEl.textContent = hint.value;
+        valEl.style.color = 'var(--text-primary)';
+      }
+      if (labelEl) labelEl.style.color = 'var(--text-secondary)';
+      if (descEl) descEl.style.display = 'none';
+    } else {
+      el.style.opacity = '0.5';
+      if (valEl) {
+        valEl.textContent = '???';
+        valEl.style.color = 'var(--text-secondary)';
+      }
+      if (labelEl) labelEl.style.color = 'var(--text-secondary)';
+      if (descEl) descEl.style.display = 'block';
+    }
+  });
+}
+
 function startNewGame() {
+  fadeOutAndStopSnippet();
   targetAlbum = selectTargetAlbum();
   attempts = [];
   isGameOver = false;
@@ -126,6 +173,7 @@ function startNewGame() {
     };
   }
 
+  updateHintsUI();
   renderUI();
 }
 
@@ -145,6 +193,8 @@ function processGuess(guessAlbum) {
     dailyStats.dailyGuesses = attempts;
     saveStats();
   }
+
+  updateHintsUI();
 
   if (isCorrect) {
     handleWin();
@@ -168,6 +218,7 @@ function handleWin() {
     saveStats();
   }
   renderUI();
+  playSnippet();
 }
 
 function handleLoss() {
@@ -181,6 +232,7 @@ function handleLoss() {
     saveStats();
   }
   renderUI();
+  playSnippet();
 }
 
 function renderUI() {
@@ -190,11 +242,13 @@ function renderUI() {
     artFrame.classList.add('revealed');
     artFrame.style.backgroundPosition = 'center';
     artFrame.style.backgroundSize = '100%';
+    artFrame.style.cursor = 'pointer';
   } else {
     artFrame.classList.remove('revealed');
     artFrame.style.backgroundPosition = `${zoomOrigin.x}% ${zoomOrigin.y}%`;
     const currentAttemptIndex = attempts.length;
     artFrame.style.backgroundSize = `${ZOOM_LEVELS[currentAttemptIndex]}%`;
+    artFrame.style.cursor = 'default';
   }
 
   progressTrack.innerHTML = '';
@@ -341,9 +395,25 @@ function handleSearchInput(e) {
 
 function setupEventListeners() {
   modeSwitchBtn.addEventListener('click', () => {
-    currentMode = currentMode === 'daily' ? 'endless' : 'daily';
-    document.getElementById('mode-text').textContent = currentMode === 'daily' ? 'Daily' : 'Endless';
-    startNewGame();
+    modeModal.classList.remove('hidden');
+  });
+
+  document.getElementById('select-daily').addEventListener('click', () => {
+    if (currentMode !== 'daily') {
+      currentMode = 'daily';
+      document.getElementById('mode-text').textContent = 'Daily';
+      startNewGame();
+    }
+    modeModal.classList.add('hidden');
+  });
+
+  document.getElementById('select-endless').addEventListener('click', () => {
+    if (currentMode !== 'endless') {
+      currentMode = 'endless';
+      document.getElementById('mode-text').textContent = 'Endless';
+      startNewGame();
+    }
+    modeModal.classList.add('hidden');
   });
 
   guessInput.addEventListener('input', handleSearchInput);
@@ -360,14 +430,49 @@ function setupEventListeners() {
     updateStatsUI();
     statsModal.classList.remove('hidden');
   };
+  settingsBtn.onclick = () => settingsModal.classList.remove('hidden');
+  hintsBtn.onclick = () => hintsModal.classList.remove('hidden');
+
+  themeToggle.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      document.body.classList.add('light-mode');
+      localStorage.setItem('waxdle_theme', 'light');
+    } else {
+      document.body.classList.remove('light-mode');
+      localStorage.setItem('waxdle_theme', 'dark');
+    }
+  });
+
+  const audioToggle = document.getElementById('audio-toggle');
+  if (audioToggle) {
+    audioToggle.addEventListener('change', (e) => {
+      if (!e.target.checked) {
+        fadeOutAndStopSnippet();
+      }
+    });
+  }
 
   document.querySelectorAll('.close-btn, .modal-backdrop').forEach(btn => {
     btn.onclick = (e) => {
       helpModal.classList.add('hidden');
       aboutModal.classList.add('hidden');
       statsModal.classList.add('hidden');
+      modeModal.classList.add('hidden');
+      settingsModal.classList.add('hidden');
+      hintsModal.classList.add('hidden');
     };
   });
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem('waxdle_theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.checked = true;
+  } else {
+    document.body.classList.remove('light-mode');
+    themeToggle.checked = false;
+  }
 }
 
 function loadStats() {
@@ -424,6 +529,82 @@ function shareDaily() {
   }).catch(err => {
     alert("Failed to copy to clipboard");
   });
+}
+
+artFrame.addEventListener('click', () => {
+  if (isGameOver) {
+    playSnippet();
+  }
+});
+
+async function playSnippet() {
+  const audioToggle = document.getElementById('audio-toggle');
+  if (!audioToggle || !audioToggle.checked) return;
+  if (!targetAlbum || !targetAlbum.topTrack) return;
+
+  stopSnippet();
+
+  try {
+    const query = encodeURIComponent(`${targetAlbum.artist} ${targetAlbum.topTrack}`);
+    const response = await fetch(`https://itunes.apple.com/search?term=${query}&entity=song&limit=1`);
+    const data = await response.json();
+    if (data.results && data.results.length > 0 && data.results[0].previewUrl) {
+      currentAudio = new Audio(data.results[0].previewUrl);
+      currentAudio.volume = 0;
+      currentAudio.play();
+
+      let volume = 0;
+      audioFadeInterval = setInterval(() => {
+        if (volume < 0.95) {
+          volume += 0.05;
+          currentAudio.volume = volume;
+        } else {
+          currentAudio.volume = 1;
+          clearInterval(audioFadeInterval);
+        }
+      }, 50);
+
+      audioTimeout = setTimeout(() => {
+        let fadeOutVol = 1;
+        audioFadeInterval = setInterval(() => {
+          if (fadeOutVol > 0.05) {
+            fadeOutVol -= 0.05;
+            currentAudio.volume = fadeOutVol;
+          } else {
+            stopSnippet();
+          }
+        }, 50);
+      }, 14000);
+    }
+  } catch (err) {
+    console.error("Failed to fetch or play audio snippet", err);
+  }
+}
+
+function stopSnippet() {
+  if (audioFadeInterval) clearInterval(audioFadeInterval);
+  if (audioTimeout) clearTimeout(audioTimeout);
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+function fadeOutAndStopSnippet() {
+  if (!currentAudio) return;
+  if (audioFadeInterval) clearInterval(audioFadeInterval);
+  if (audioTimeout) clearTimeout(audioTimeout);
+
+  let fadeOutVol = currentAudio.volume;
+  audioFadeInterval = setInterval(() => {
+    if (fadeOutVol > 0.05) {
+      fadeOutVol -= 0.05;
+      currentAudio.volume = fadeOutVol;
+    } else {
+      stopSnippet();
+    }
+  }, 50);
 }
 
 init();
