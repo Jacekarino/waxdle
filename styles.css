@@ -443,3 +443,39 @@ main {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
 }
+
+@media (max-width: 600px) {
+  header {
+    padding: 0.8rem 1rem;
+  }
+
+  .header-left,
+  .header-right {
+    gap: 0.5rem;
+    flex: unset;
+  }
+
+  .header-center {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    gap: 0.25rem !important;
+  }
+
+  .logo-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-btn {
+    padding: 0.25rem;
+  }
+
+  .icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
